@@ -1,8 +1,25 @@
+import java.io.*;
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
+        String rubyCode = "ruby.rb";
+        ArrayList<String> rubyLineArrayList = new ArrayList<>();
 
-        System.out.println("sandro luka gigi avto");
-        System.out.println("Fop_midterm_2");
-        System.out.println("Hello World!");
+        try (BufferedReader reader = new BufferedReader(new FileReader(rubyCode))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                rubyLineArrayList.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String[] rubyLinesArray = new String[rubyLineArrayList.size()];
+        rubyLineArrayList.toArray(rubyLinesArray);
+
+        for (String line : rubyLinesArray) {
+            System.out.println(line);
+        }
     }
 }

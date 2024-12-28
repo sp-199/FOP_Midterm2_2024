@@ -3,10 +3,11 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        String rubyCode = "ruby.rb";
+        String rubyCode="ruby.rb";
+    }
+    public static String[]textFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(rubyCode))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 rubyLineArrayList.add(line);
@@ -17,9 +18,6 @@ public class Main {
 
         String[] rubyLinesArray = new String[rubyLineArrayList.size()];
         rubyLineArrayList.toArray(rubyLinesArray);
-
-        for (String line : rubyLinesArray) {
-            System.out.println(line);
-        }
+        return rubyLinesArray;
     }
 }

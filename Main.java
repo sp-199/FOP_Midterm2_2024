@@ -3,5 +3,6 @@ public class Main {
 
         System.out.println("sandro luka gigi avto");
         System.out.println("Fop_midterm_2");
+        System.out.println("Hello World!");
     }
 }

@@ -42,8 +42,10 @@
 // codes of the algorithms
 
 
-// #  sum of first n numbers
+// # frozen_string_literal: true
+// n = gets.to_i
 
+// #  sum of first n numbers
 // def Sum_Of_First_n_Numbers(n)
 //   sum = 0
 //   for i in 1..n
@@ -51,7 +53,7 @@
 //   end
 //   return sum
 // end
-// puts Sum_Of_First_n_Numbers(n)
+
 
 // # Factorial of n
 // def n_Factorial(n)
@@ -66,11 +68,10 @@
 //   end
 // end
 
-// puts n_Factorial(n)
 
 // #GCD of two numbers
 
-// def gcd(a, b)
+// def GCD(a, b)
 //   while b != 0
 //     a = b,  b = a % b  # Update a to b and b to a % b
 //   end
@@ -89,57 +90,82 @@
 //   end
 //   return reversed_number
 // end
-// puts reverse_number(n)
 
 
-// Check if a Number is Prime
+// #Check if a number is prime
+
+// def is_Prime(n)
+//   return false if n < 2
+
+//   for i in 2..n / 2
+//     if n % i == 0
+//       return false
+//     end
+//   end
+
+//   return true
+// end
 
 
-//def prime?(n)
-//  return false if n <= 1
-//  (2..Math.sqrt(n)).each do |i|
-//    return false if n % i == 0
-//  end
-//  true
-//end
+// #CHeck If a number is a palindrome
+
+// def Is_Palindrome(n)
+//   return n == reverse_number(n)
+// end
 
 
+// #Largest Digit
+
+// def largest_digit(n)
+//   n = n.abs
+//   largest = 0
+
+//   while n > 0
+//     digit = n % 10
+//     if digit > largest
+//       largest = digit
+//     end
+//     n /= 10
+//   end
+
+//   return largest
+// end
 
 
-//Find the Largest Digit in a Number
+// #Sum Of Digits
 
-//def largest_digit(number)
-//  number.to_s.chars.map(&:to_i).max
-//end
+// def Sum_of_Digits(n)
+//   n = n.abs
+//   sum = 0
 
-
-//Sum of the digits
-
-//def SumOfDigits(num)
-// num = num.abs
-// sum = 0
-//	while num > 0
-//		k = num % 10
-//      sum += k
-//      num /= 10
-//	end
-//	    return sum
-//	end
+//   while n > 0
+//     digit = n % 10
+//     sum += digit
+//     n /= 10
+//   end
+//   return sum
+// end
 
 
+// #Multiplication Table
+
+// def Multiplication_Table(n)
+//   for i in 1..10
+//     puts i * n
+//   end
+//   return nil
+//   end
 
 
-// n-th fibonacci number
+// #N-th Fibonacci Number
 
-//def fibonacci(n)
-//  return n if n <= 1
-//  a, b = 0, 1
-//  (2..n).each do
-//    a, b = b, a + b
-//  end
-//  b
-//end
-
-//did not commit properly
+// def fibonacci(n)
+//     return n if n <= 1
+//     a, b = 0, 1
+//     (2..n).each do
+//         a, b = b, a + b
+//       end
+//     b
+// end
 
 

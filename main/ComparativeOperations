@@ -1,0 +1,186 @@
+package main;
+
+import java.util.HashMap;
+import java.util.Objects;
+
+public class ComparativeOperations {
+    public static boolean EqualityResult(String line, HashMap variableMap) {
+        int index = line.indexOf("==");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) == variableMap.get(variableName2);
+    }
+
+    private static boolean NotEqualityResult(String line, HashMap variableMap) {
+        int index = line.indexOf("!=");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) != variableMap.get(variableName2);
+    }
+
+    private static boolean LessThanResult(String line, HashMap<String, Integer> variableMap) {
+
+        int index = line.indexOf("<");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) < variableMap.get(variableName2);
+    }
+
+    private static boolean GreaterThanResult(String line, HashMap<String, Integer> variableMap) {
+        int index = line.indexOf(">");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) < variableMap.get(variableName2);
+    }
+
+    private static boolean LessOrEqualResult(String line, HashMap<String, Integer> variableMap) {
+        int index = line.indexOf("<=");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) <= variableMap.get(variableName2);
+    }
+
+    private static boolean GreaterOrEqualResult(String line, HashMap<String, Integer> variableMap) {
+        int index = line.indexOf(">=");
+        String variable1Name = "";
+        String variableName2 = "";
+
+        // Ignoring optional space
+        int j = index - 1;
+        while (line.charAt(index - 1) == ' ') j--;
+
+        // Getting variable name
+        while (j >= 0 && line.charAt(j) != ' ') {
+            variable1Name += line.charAt(j);
+            j--;
+        }
+        variable1Name = new StringBuilder(variable1Name).reverse().toString();
+
+
+        int k = index + 2;
+        while (line.charAt(k) == ' ') k++;
+
+        // Getting second variable name
+        while (k < line.length() && line.charAt(k) != ' ') {
+            variableName2 += line.charAt(k);
+            k++;
+        }
+        return variableMap.get(variable1Name) >= variableMap.get(variableName2);
+    }
+
+    public static boolean answer(String line, HashMap variableMap) {
+        //check if line contains a comparative operation
+        if (line.contains("==")) return EqualityResult(line, variableMap);
+        else if (line.contains("!=")) return NotEqualityResult(line, variableMap);
+        else if (line.contains("<")) return LessThanResult(line, variableMap);
+        else if (line.contains(">")) return GreaterThanResult(line, variableMap);
+        else if (line.contains("<=")) return LessOrEqualResult(line, variableMap);
+        else if (line.contains(">=")) return GreaterOrEqualResult(line, variableMap);
+        return false;
+    }
+}

@@ -129,7 +129,7 @@
 
 
 
-//n-th fibonacci number
+//n-th fibonacci number.
 
 //def fibonacci(n)
 //  return n if n <= 1

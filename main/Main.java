@@ -11,7 +11,7 @@ public class Main {
             System.out.println(line);
         }
 
-        System.out.println("\n");
+        System.out.println();
 
         RubyToJavaInterpreter.variableMap.forEach((key, value) -> {
             System.out.println(key + ": " + value);

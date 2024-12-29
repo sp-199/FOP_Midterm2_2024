@@ -49,11 +49,13 @@ public class RubyToJavaInterpreter {
                 int k = i + 1;
                 if (line.charAt(k) == ' ') k++;
 
+                // Getting variable value
                 while (k < line.length() && line.charAt(k) != ' ') {
                     variableValue += line.charAt(k);
                     k++;
                 }
 
+                // Checking for variable type and adding to map
                 if (variableValue.charAt(0) == '"' || variableValue.charAt(0) == '\'') {
                     variableMap.put(variableName, variableValue.substring(1, variableValue.length() - 1));
                 } else if (variableValue.charAt(0) == 't') {

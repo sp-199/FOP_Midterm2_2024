@@ -127,7 +127,6 @@ public class RubyToJavaInterpreter {
 
     public static int evaluateArithmeticExpression(String expression) {
         List<String> separatedExpression = separateExpression(expression);
-        System.out.println("Tokenized Expression: " + separatedExpression);
 
         for (int i = 0; i < separatedExpression.size(); i++) {
             if (separatedExpression.get(i).equals("*") || separatedExpression.get(i).equals("/") || separatedExpression.get(i).equals("%")) {

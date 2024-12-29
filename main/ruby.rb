@@ -8,3 +8,4 @@ float = 81.32
 isNotActive = false
 
 puts("Goodbye World")
+if float == 67

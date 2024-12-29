@@ -10,6 +10,7 @@ import java.util.HashMap;
 public class RubyToJavaInterpreter {
 
     public static HashMap<String, Object> variableMap = new HashMap<>();
+    public static HashMap<String, Class<?>> typeMap = new HashMap<>();
 
     public static String[]textFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
@@ -29,8 +30,8 @@ public class RubyToJavaInterpreter {
     }
 
     public static void findVariableDeclaration (String line) {
-        for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == '=' && line.charAt(i + 1) != '=') {
+        for (int i = 1; i < line.length(); i++) {
+            if (line.charAt(i) == '=' && line.charAt(i + 1) != '=' && line.charAt(i - 1) != '=') {
                 String variableName = "";
                 String variableValue = "";
 
@@ -58,15 +59,40 @@ public class RubyToJavaInterpreter {
                 // Checking for variable type and adding to map
                 if (variableValue.charAt(0) == '"' || variableValue.charAt(0) == '\'') {
                     variableMap.put(variableName, variableValue.substring(1, variableValue.length() - 1));
+                    typeMap.put(variableName, String.class);
                 } else if (variableValue.charAt(0) == 't') {
                     variableMap.put(variableName, true);
+                    typeMap.put(variableName, Boolean.class);
                 } else if (variableValue.charAt(0) == 'f') {
                     variableMap.put(variableName, false);
+                    typeMap.put(variableName, Boolean.class);
                 } else if (variableValue.contains(".")) {
                     variableMap.put(variableName, Double.parseDouble(variableValue));
+                    typeMap.put(variableName, Double.class);
                 } else {
                     variableMap.put(variableName, Integer.parseInt(variableValue));
+                    typeMap.put(variableName, Integer.class);
                 }
+
+                break;
+            }
+        }
+    }
+
+    // Checking for if/else statements
+    public static void ifElseStatements (String line) {
+        for (int i = 0; i < line.length(); i++) {
+            if (line.charAt(i) == 'i' && line.charAt(i + 1) == 'f' && line.charAt(i + 2) == ' ') {
+                String condition = "";
+                int j = i + 2;
+                while (j < line.length() - 1) {
+                    j++;
+                    if (line.charAt(j) == ' ') {
+                        continue;
+                    }
+                    condition += line.charAt(j);
+                }
+                break;
             }
         }
     }

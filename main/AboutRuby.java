@@ -2,7 +2,7 @@
 
 // puts - same as System.out.println();   print - same as System.out.print();
 
-// in ruby u does not need to specify the type of the variable( age = 15 );also no ';' is necessary
+// in ruby u do not need to specify the type of the variable( age = 15 );also no ';' is necessary
 // flaws = nil (means that it has no value)
 // .strip(); - removes all unnecessary spaces from the String
 // .include? "x" - tells us if our String includes x in it;

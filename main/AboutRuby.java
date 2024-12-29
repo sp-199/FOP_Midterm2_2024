@@ -37,5 +37,54 @@
 //                           puts y
 //                       end
 
+# frozen_string_literal: true
+n = gets.to_i
 
+#  sum of first n numbers
+def Sum_Of_First_n_Numbers(n)
+  sum = 0
+  for i in 1..n
+    sum = sum + i
+  end
+  return sum
+end
+puts Sum_Of_First_n_Numbers(n)
+
+# Factorial of n
+def n_Factorial(n)
+  if n < 0
+    return -1
+  else
+    fact = 1
+    for i in 1..n
+      fact = fact * i
+    end
+    return fact
+  end
+end
+
+puts n_Factorial(n)
+
+#GCD of two numbers
+
+def gcd(a, b)
+  while b != 0
+    a = b,  b = a % b  # Update a to b and b to a % b
+  end
+  return a
+end
+
+
+#Reverse a Number
+
+def reverse_number(n)
+  reversed_number = 0
+  while n > 0
+    last_digit = n % 10
+    reversed_number = reversed_number * 10 + last_digit
+    n = n/10
+  end
+  return reversed_number
+end
+puts reverse_number(n)
 

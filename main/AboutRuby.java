@@ -19,7 +19,8 @@
 
 // basics of the if-else statements are almost same as in java with minor changes ->
 //for example we use elsif here as(java - else if),also we say end at the end of the statements(as many of it as many else is in the code).
-// example of while loop in Ruby -  while i >= 8
+// example of while loop in Ruby -  i = 0
+//                                 while i <= 8   - //output = 0,1,2,3,4,5,6,7,8
 //                                       puts i
 //                                     i+=1
 //                                  end   (pretty much the same as while loops in java)
@@ -28,7 +29,7 @@
 //                                 puts "coding is fun"
 //                            end
 
-// for loops in Ruby - E.G. - for x in 0..5
+// for loops in Ruby - E.G. - for x in 0..5  - //output = 0,1,2,3,4,5
 //                                puts x
 //                            end
 //or another way would be ->
@@ -37,6 +38,4 @@
 //                       end
 
 
-//print "enter your Name; "
-// gets name
-//"Hello " + name
+

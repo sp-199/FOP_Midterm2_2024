@@ -1,0 +1,32 @@
+package main;
+
+public class ComparativeOperations {
+   public static boolean contains_equal(String a){
+     // return a.contains("==");
+      for (int i = 0; i < a.length(); i++){
+          if (a.charAt(i) == '=' && a.charAt(i+1) == '=') return true;
+      }
+      return false;
+    }
+    public static boolean contains_not_equal(String a){
+       return a.contains("!=");
+    }
+    public static boolean contains_greater(String a){
+       return a.contains(">");
+    }
+    public static boolean contains_less(String a){
+       return a.contains("<");
+    }
+    public static boolean contains_greaterOrEqual(String a){
+       return a.contains(">=");
+    }
+    public static boolean contains_lessOrEqual(String a){
+       return a.contains("<=");
+    }
+    public static boolean contains_comparative(String a){
+       return contains_equal(a) || contains_not_equal(a) || contains_greater(a) || contains_less(a)
+               || contains_greaterOrEqual(a) || contains_lessOrEqual(a);
+    }
+
+
+}

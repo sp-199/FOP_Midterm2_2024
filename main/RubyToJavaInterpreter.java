@@ -92,6 +92,9 @@ public class RubyToJavaInterpreter {
                     }
                     condition += line.charAt(j);
                 }
+                boolean conditionState = ComparativeOperations.answer(condition, variableMap);
+
+                System.out.println(conditionState);
                 break;
             }
         }

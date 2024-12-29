@@ -172,15 +172,14 @@ public class ComparativeOperations {
         return variableMap.get(variable1Name) >= variableMap.get(variableName2);
     }
 
-    public static boolean answer(String line, HashMap variableMap) {
+    public static boolean answer(String condition, HashMap variableMap) {
         //check if line contains a comparative operation
-        if (line.contains("==")) return EqualityResult(line, variableMap);
-        else if (line.contains("!=")) return NotEqualityResult(line, variableMap);
-        else if (line.contains("<")) return LessThanResult(line, variableMap);
-        else if (line.contains(">")) return GreaterThanResult(line, variableMap);
-        else if (line.contains("<=")) return LessOrEqualResult(line, variableMap);
-        else if (line.contains(">=")) return GreaterOrEqualResult(line, variableMap);
+        if (condition.contains("==")) return EqualityResult(condition, variableMap);
+        else if (condition.contains("!=")) return NotEqualityResult(condition, variableMap);
+        else if (condition.contains("<")) return LessThanResult(condition, variableMap);
+        else if (condition.contains(">")) return GreaterThanResult(condition, variableMap);
+        else if (condition.contains("<=")) return LessOrEqualResult(condition, variableMap);
+        else if (condition.contains(">=")) return GreaterOrEqualResult(condition, variableMap);
         return false;
     }
 }
-

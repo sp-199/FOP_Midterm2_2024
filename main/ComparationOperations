@@ -1,4 +1,4 @@
-package main;
+package Main;
 
 public class ComparativeOperations {
    public static boolean contains_equal(String a){

@@ -1,173 +1,172 @@
 package main;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class ComparativeOperations {
-    public static boolean EqualityResult(String line, HashMap variableMap) {
-        int index = line.indexOf("==");
+    public static boolean EqualityResult(String condition, HashMap variableMap) {
+        int index = condition.indexOf("==");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) == variableMap.get(variableName2);
     }
 
-    private static boolean NotEqualityResult(String line, HashMap variableMap) {
-        int index = line.indexOf("!=");
+    private static boolean NotEqualityResult(String condition, HashMap variableMap) {
+        int index = condition.indexOf("!=");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) != variableMap.get(variableName2);
     }
 
-    private static boolean LessThanResult(String line, HashMap<String, Integer> variableMap) {
+    private static boolean LessThanResult(String condition, HashMap<String, Integer> variableMap) {
 
-        int index = line.indexOf("<");
+        int index = condition.indexOf("<");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) < variableMap.get(variableName2);
     }
 
-    private static boolean GreaterThanResult(String line, HashMap<String, Integer> variableMap) {
-        int index = line.indexOf(">");
+    private static boolean GreaterThanResult(String condition, HashMap<String, Integer> variableMap) {
+        int index = condition.indexOf(">");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) < variableMap.get(variableName2);
     }
 
-    private static boolean LessOrEqualResult(String line, HashMap<String, Integer> variableMap) {
-        int index = line.indexOf("<=");
+    private static boolean LessOrEqualResult(String condition, HashMap<String, Integer> variableMap) {
+        int index = condition.indexOf("<=");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) <= variableMap.get(variableName2);
     }
 
-    private static boolean GreaterOrEqualResult(String line, HashMap<String, Integer> variableMap) {
-        int index = line.indexOf(">=");
+    private static boolean GreaterOrEqualResult(String condition, HashMap<String, Integer> variableMap) {
+        int index = condition.indexOf(">=");
         String variable1Name = "";
         String variableName2 = "";
 
         // Ignoring optional space
         int j = index - 1;
-        while (line.charAt(index - 1) == ' ') j--;
+        while (condition.charAt(index - 1) == ' ') j--;
 
         // Getting variable name
-        while (j >= 0 && line.charAt(j) != ' ') {
-            variable1Name += line.charAt(j);
+        while (j >= 0 && condition.charAt(j) != ' ') {
+            variable1Name += condition.charAt(j);
             j--;
         }
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
         int k = index + 2;
-        while (line.charAt(k) == ' ') k++;
+        while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
-        while (k < line.length() && line.charAt(k) != ' ') {
-            variableName2 += line.charAt(k);
+        while (k < condition.length() && condition.charAt(k) != ' ') {
+            variableName2 += condition.charAt(k);
             k++;
         }
         return variableMap.get(variable1Name) >= variableMap.get(variableName2);
@@ -184,3 +183,4 @@ public class ComparativeOperations {
         return false;
     }
 }
+

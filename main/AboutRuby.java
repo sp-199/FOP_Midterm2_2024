@@ -7,7 +7,7 @@
 // .strip(); - removes all unnecessary spaces from the String
 // .include? "x" - tells us if our String includes x in it;
 // float - basically same as double
-// gets - equivalent of java's scanner(use gets.chomp() to print whole thing on 1 line)
+// gets(name(variable) = gets)- equivalent of java's scanner(use gets.chomp() to print whole thing on 1 line(while having variable in between(we know this)))
 // num.to_i - way of converting num into integer so that ruby does  not think that it is String
 // E.G. - puts(num1 + num2) - ruby will print out values of these numbers in String so to_i method avoids that.
 // def - way of defining a method(for example like public static void)
@@ -35,3 +35,8 @@
 //                      0..5.each do |y|
 //                           puts y
 //                       end
+
+
+//print "enter your Name; "
+// gets name
+//"Hello " + name

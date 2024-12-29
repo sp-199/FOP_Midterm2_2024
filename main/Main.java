@@ -8,6 +8,11 @@ public class Main {
         String rubyCode= "main/ruby.rb";
         for (String line: RubyToJavaInterpreter.textFileToStringArray(rubyCode)) {
             System.out.println(line);
+            RubyToJavaInterpreter.findVariableDeclaration(line);
+            RubyToJavaInterpreter.ifElseStatements(line);
         }
+
+        System.out.println();
+
     }
 }

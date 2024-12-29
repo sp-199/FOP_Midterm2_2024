@@ -77,7 +77,7 @@ public class ComparativeOperations {
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
-        int k = index + 2;
+        int k = index + 1;
         while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name
@@ -105,7 +105,7 @@ public class ComparativeOperations {
         variable1Name = new StringBuilder(variable1Name).reverse().toString();
 
 
-        int k = index + 2;
+        int k = index + 1;
         while (condition.charAt(k) == ' ') k++;
 
         // Getting second variable name

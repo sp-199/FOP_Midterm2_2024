@@ -25,7 +25,7 @@
 //                                     i+=1
 //                                  end   (pretty much the same as while loops in java)
 
-// to do something n times - n.times do
+// to do something n times - n.times do     //output = coding is fun (n times on different lines)
 //                                 puts "coding is fun"
 //                            end
 
@@ -37,10 +37,13 @@
 //                           puts y
 //                       end
 
-// # frozen_string_literal: true
-// n = gets.to_i
+
+
+// codes of the algorithms
+
 
 // #  sum of first n numbers
+
 // def Sum_Of_First_n_Numbers(n)
 //   sum = 0
 //   for i in 1..n
@@ -87,4 +90,54 @@
 //   return reversed_number
 // end
 // puts reverse_number(n)
+
+
+// Check if a Number is Prime
+
+
+//def prime?(n)
+//  return false if n <= 1
+//  (2..Math.sqrt(n)).each do |i|
+//    return false if n % i == 0
+//  end
+//  true
+//end
+
+
+
+
+//Find the Largest Digit in a Number
+
+//def largest_digit(number)
+//  number.to_s.chars.map(&:to_i).max
+//end
+
+
+//Sum of the digits
+
+//def SumOfDigits(num)
+// num = num.abs
+// sum = 0
+//	while num > 0
+//		k = num % 10
+//      sum += k
+//      num /= 10
+//	end
+//	    return sum
+//	end
+
+
+
+
+//n-th fibonacci number
+
+//def fibonacci(n)
+//  return n if n <= 1
+//  a, b = 0, 1
+//  (2..n).each do
+//    a, b = b, a + b
+//  end
+//  b
+//end
+
 

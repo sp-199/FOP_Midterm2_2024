@@ -15,6 +15,7 @@ example of method -  def sayhi(name)   - return keyword is used just as in java 
 puts ("Hello " + name)
 end
 
+
 calling a method - sayhi("Gigi")  //output - Hello Gigi
 
 basics of the if-else statements are almost same as in java with minor changes ->

@@ -130,7 +130,7 @@ def largest_digit(n)
     if digit > largest
       largest = digit
     end
-    n /= 10
+    n = n/10
   end
   return largest
 end

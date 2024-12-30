@@ -1,15 +1,9 @@
-
-is_active = true
-age = 18
-inte = 29
-isNotActive = false
-
-while inte > age
-
+n = 10
+sum = 0
+i = 1
+while i <= n
+    sum = sum + i
+    i = i + 1
 end
 
-if (inte < inte - age)
-    puts"metia"
-else
-    inte= age +8
-end
+puts sum

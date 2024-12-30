@@ -11,6 +11,7 @@ public class Main {
             if (RubyToJavaInterpreter.skipLine) {RubyToJavaInterpreter.skipLine = false; continue;}
             RubyToJavaInterpreter.findVariableDeclaration(line);
             RubyToJavaInterpreter.ifElseStatements(line);
+            RubyToJavaInterpreter.print(line);
         }
 
         System.out.println();

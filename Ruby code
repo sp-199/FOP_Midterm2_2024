@@ -1,0 +1,205 @@
+# frozen_string_literal: true
+n = gets.to_i
+
+#  sum of first n numbers
+def Sum_Of_First_n_Numbers(n)
+  sum = 0
+  for i in 1..n
+    sum = sum + i
+  end
+  return sum
+end
+
+#while variant
+def Sum_Of_First_N_Numbers(n)
+  sum = 0
+  i = 1
+  while i <= n
+    sum = sum + i
+    i = i + 1
+  end
+  return sum
+end
+
+
+# Factorial of n
+def n_Factorial(n)
+  # if n < 0
+  # return -1
+  #else
+    fact = 1
+    for i in 1..n
+      fact = fact * i
+    end
+    return fact
+end
+
+#while variant
+def N_Factorial(n)
+i = 1
+fact = 1
+while i <= n
+  fact = fact * i
+  i = i + 1
+end
+return fact
+end
+
+#GCD of two numbers
+
+def GCD(a, b)
+  if a < b
+    temp = a
+    a = b
+    b = temp
+  end
+  while b != 0
+    a = b
+    b = a % b  # Update a to b and b to a % b
+  end
+  return a
+end
+
+
+#Reverse a Number
+
+def reverse_number(n)
+  reversed_number = 0
+  while n > 0
+    last_digit = n % 10
+    reversed_number = reversed_number * 10 + last_digit
+    n = n/10
+  end
+  return reversed_number
+end
+
+
+#Check if a number is prime
+
+def is_Prime(n)
+  if n < 2
+    return false
+  end
+  for i in 2..n / 2
+    if n % i == 0
+      return false
+    end
+  end
+  return true
+end
+
+#while variant
+
+def Is_Prime(n)
+  if n < 2
+    return false
+  end
+  i = 2
+  isprime = true
+  while i < n/2
+    if n % i == 0
+      return false
+    end
+    i = i + 1
+  end
+  return isprime
+end
+
+
+#CHeck If a number is a palindrome
+
+def Is_Palindrome(n)
+  og = n
+  reversed_number = 0
+  while n > 0
+    last_digit = n % 10
+    reversed_number = reversed_number * 10 + last_digit
+    n = n/10
+  end
+  return og == reversed_number
+end
+
+
+#Largest Digit
+
+def largest_digit(n)
+  n = n.abs
+  largest = 0
+  while n > 0
+    digit = n % 10
+    if digit > largest
+      largest = digit
+    end
+    n /= 10
+  end
+  return largest
+end
+
+
+#Sum Of Digits
+
+def Sum_of_Digits(n)
+  n = n.abs
+  sum = 0
+
+  while n > 0
+    digit = n % 10
+    sum += digit
+    n /= 10
+  end
+  return sum
+end
+
+
+#Multiplication Table
+
+def Multiplication_Table(n)
+  for i in 1..10
+    puts i * n
+  end
+  return nil
+end
+
+#while variant
+
+def Multiplication_table(n)
+  i = 1
+  while i <= 10
+    puts i * n
+    i = i + 1
+  end
+  return nil
+end
+
+
+#N-th Fibonacci Number
+
+def fibonacci(n)
+  if n <= 1
+    return n
+  end
+    a = 0
+    b = 1
+  (2..n).each do
+        a, b = b, a + b
+      end
+  return b
+end
+
+#while variant
+
+def fiboNacci(n)
+  if n <= 1
+    return n
+  end
+  a = 0
+  b = 1
+  i = 2
+  while i <= n
+    temp = a
+    a = b
+    b = temp + b
+    i = i + 1
+  end
+  return b
+end

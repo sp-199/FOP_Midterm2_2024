@@ -46,7 +46,7 @@ public class RubyToJavaInterpreter {
                 // Getting variable name
                 while (j >= 0 && line.charAt(j) != ' ') {
                     variableName += line.charAt(j);
-                    j --;
+                    j--;
                 }
 
                 variableName = new StringBuilder(variableName).reverse().toString();
@@ -55,13 +55,16 @@ public class RubyToJavaInterpreter {
                 if (line.charAt(k) == ' ') k++;
 
                 // Getting variable value
-                while (k < line.length() && line.charAt(k) != ' ') {
+                while (k < line.length()) {
                     variableValue += line.charAt(k);
                     k++;
                 }
 
                 // Checking for variable type and adding to map
-                if (variableValue.charAt(0) == '"' || variableValue.charAt(0) == '\'') {
+                if (containsExpression(variableValue)) {
+                    variableMap.put(variableName, evaluateArithmeticExpression(variableValue));
+                    typeMap.put(variableName, Integer.class);
+                } else if (variableValue.charAt(0) == '"' || variableValue.charAt(0) == '\'') {
                     variableMap.put(variableName, variableValue.substring(1, variableValue.length() - 1));
                     typeMap.put(variableName, String.class);
                 } else if (variableValue.charAt(0) == 't') {
@@ -269,5 +272,9 @@ public class RubyToJavaInterpreter {
         } else{
             System.out.print("");
         }
+    }
+
+    public static boolean containsExpression(String line) {
+        return line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/") || line.contains("%");
     }
 }

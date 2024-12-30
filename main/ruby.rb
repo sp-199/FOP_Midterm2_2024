@@ -5,8 +5,8 @@ inte = 29
 isNotActive = false
 
 
-if inte > age
-    puts "metia"
+if inte < age
+    puts"metia"
 else
-    puts "naklebia"
+    inte=inte+2
 end

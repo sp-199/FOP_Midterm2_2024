@@ -6,13 +6,19 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         String rubyCode= "main/ruby.rb";
-        for (String line: RubyToJavaInterpreter.textFileToStringArray(rubyCode)) {
-            RubyToJavaInterpreter.elseDetector(line);
+        String[] lineArray = RubyToJavaInterpreter.textFileToStringArray(rubyCode);
+
+        for (int current = 0; current < lineArray.length; current++) {
+            RubyToJavaInterpreter.elseDetector(lineArray[current]);
             if (RubyToJavaInterpreter.skipLine) {RubyToJavaInterpreter.skipLine = false; continue;}
-            RubyToJavaInterpreter.findVariableDeclaration(line);
-            RubyToJavaInterpreter.ifElseStatements(line);
-            RubyToJavaInterpreter.print(line);
+            RubyToJavaInterpreter.findVariableDeclaration(lineArray[current]);
+            RubyToJavaInterpreter.ifElseStatements(lineArray[current]);
+            RubyToJavaInterpreter.print(lineArray[current]);
         }
+
+        RubyToJavaInterpreter.variableMap.forEach((key, value) -> {
+            System.out.println(key + ": " + value);
+        });
 
         System.out.println();
     }

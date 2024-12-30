@@ -11,7 +11,8 @@ public class RubyToJavaInterpreter {
 
     public static HashMap<String, Object> variableMap = new HashMap<>();
     public static HashMap<String, Class<?>> typeMap = new HashMap<>();
-    public static HashMap<String, Integer> integerMap = new HashMap<>();
+    public static boolean skipLine = false;
+    public static boolean shouldSkip = false;
 
     public static String[]textFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
@@ -74,7 +75,6 @@ public class RubyToJavaInterpreter {
                 } else {
                     variableMap.put(variableName, Integer.parseInt(variableValue));
                     typeMap.put(variableName, Integer.class);
-                    integerMap.put(variableName, Integer.parseInt(variableValue));
                 }
 
                 break;
@@ -95,32 +95,59 @@ public class RubyToJavaInterpreter {
                     }
                     condition += line.charAt(j);
                 }
-                boolean conditionState = ComparativeOperations.answer(condition, integerMap);
-
-                System.out.println(condition + ": " + conditionState);
+                boolean conditionState = comparator(condition);
+                skipLine = !conditionState;
+                shouldSkip = !conditionState;
                 break;
             }
         }
     }
 
-//    public static boolean comparator (String condition) {
-//        String var1 = "", var2 = "", operator = "";
-//        boolean rightSide = false;
-//
-//        for (int i = 0; i < condition.length(); i++) {
-//            char current = condition.charAt(i);
-//            if (current == '=' || current == '!' || current == '>' || current == '<') {
-//                operator += current;
-//                rightSide = true;
-//                continue;
-//            } else if (rightSide) {
-//                var2 += current;
-//            } else var1 += current;
-//        }
-//
-//        System.out.println(var1 + " " + operator + " " + var2);
-//
-//        if (operator.equals("==")) return false;
-//        return false;
-//    }
+    public static void elseDetector (String line) {
+        if (shouldSkip) {
+            if (line.replaceAll(" ", "").equals("else") ||
+                    line.replaceAll(" ", "").equals("end")) {
+                shouldSkip = false;
+            } else skipLine = true;
+        } else {
+            if (line.replaceAll(" ", "").equals("else")) {
+                shouldSkip = true;
+            }
+        }
+    }
+
+    public static boolean comparator (String condition) {
+        String var1 = "", var2 = "", operator = "";
+        boolean rightSide = false;
+
+        for (int i = 0; i < condition.length(); i++) {
+            char current = condition.charAt(i);
+            if (current == '=' || current == '!' || current == '>' || current == '<') {
+                operator += current;
+                rightSide = true;
+                continue;
+            } else if (rightSide) {
+                var2 += current;
+            } else var1 += current;
+        }
+
+        int leftValue = 0;
+        int rightValue = 0;
+
+        if (Character.isLetter(var1.charAt(0))) leftValue = (Integer) variableMap.get(var1);
+
+        if (Character.isLetter(var2.charAt(0))) rightValue = (Integer) variableMap.get(var2);
+
+
+        if (leftValue == 0) leftValue = Integer.parseInt(var1);
+        if (rightValue == 0) rightValue = Integer.parseInt(var2);
+
+        if (operator.equals("==")) return leftValue == rightValue;
+        else if (operator.equals("!=")) return leftValue != rightValue;
+        else if (operator.equals(">=")) return leftValue >= rightValue;
+        else if (operator.equals("<=")) return leftValue <= rightValue;
+        else if (operator.equals(">")) return leftValue > rightValue;
+        else if (operator.equals("<")) return leftValue < rightValue;
+        return false;
+    }
 }

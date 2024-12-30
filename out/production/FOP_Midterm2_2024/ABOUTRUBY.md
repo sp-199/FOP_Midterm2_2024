@@ -88,32 +88,3 @@ end
 return reversed_number
 end
 puts reverse_number(n)
-
-
-#largest digit of a number
-
-def largest_digit(number)
-number.to_s.chars.map(&:to_i).max
-end
-
-#Fibonacci 
-
-def fibonacci(n)
-  return n if n <= 1
-  a, b = 0, 1
-  (2..n).each do
-    a, b = b, a + b
-  end
-  b
-end
-
-#sum of digits
-
-def SumOfDigits(num,sum)
-    if num > 0
-        sum += (num % 10);
-        SumOfDigits(num / 10,sum);
-    else
-        return sum;
-    end
-end

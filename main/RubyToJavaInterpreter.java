@@ -250,4 +250,36 @@ public class RubyToJavaInterpreter {
 
         return separatedExpression;
     }
+
+    public static void print(String line){
+        if (line.contains("puts ")) {
+            line = line.replace("puts ", "");
+            if(line.charAt(0)=='('){
+                line=line.replace("(", "");
+                line=line.replace(")", "");
+            }
+            if(line.charAt(0)=='"'){
+                line=line.replace("\"", "");
+            }
+            if(line.charAt(0)=='\''){
+                line=line.replace("'", "");
+            }
+            System.out.println(line);
+        }else if (line.contains("puts")) {
+            line = line.replace("puts", "");
+            if(line.charAt(0)=='('){
+                line=line.replace("(", "");
+                line=line.replace(")", "");
+            }
+            if(line.charAt(0)=='"'){
+                line=line.replace("\"", "");
+            }
+            if(line.charAt(0)=='\''){
+                line=line.replace("'", "");
+            }
+            System.out.println(line);
+        } else{
+            System.out.println();
+        }
+    }
 }

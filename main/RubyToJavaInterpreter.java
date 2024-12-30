@@ -156,8 +156,15 @@ public class RubyToJavaInterpreter {
 
         for (int i = 0; i < separatedExpression.size(); i++) {
             if (separatedExpression.get(i).equals("*") || separatedExpression.get(i).equals("/") || separatedExpression.get(i).equals("%")) {
-                int a = Integer.parseInt(separatedExpression.get(i - 1));
-                int b = Integer.parseInt(separatedExpression.get(i + 1));
+                int b = 0;
+                int a = 0;
+                if (Character.isLetter(separatedExpression.get(i + 1).charAt(0))) {
+                    b = (Integer) variableMap.get(separatedExpression.get(i + 1));
+                } else b = Integer.parseInt(separatedExpression.get(i + 1));
+                if (Character.isLetter(separatedExpression.get(i - 1).charAt(0))) {
+                    a = (Integer) variableMap.get(separatedExpression.get(i - 1));
+                } else a = Integer.parseInt(separatedExpression.get(i - 1));
+
                 int result = 0;
 
                 switch (separatedExpression.get(i)) {
@@ -185,8 +192,15 @@ public class RubyToJavaInterpreter {
 
         for (int i = 0; i < separatedExpression.size(); i++) {
             if (separatedExpression.get(i).equals("+") || separatedExpression.get(i).equals("-")) {
-                int a = Integer.parseInt(separatedExpression.get(i - 1));
-                int b = Integer.parseInt(separatedExpression.get(i + 1));
+                int b = 0;
+                int a = 0;
+                if (Character.isLetter(separatedExpression.get(i + 1).charAt(0))) {
+                    b = (Integer) variableMap.get(separatedExpression.get(i + 1));
+                } else b = Integer.parseInt(separatedExpression.get(i + 1));
+                if (Character.isLetter(separatedExpression.get(i - 1).charAt(0))) {
+                    a = (Integer) variableMap.get(separatedExpression.get(i - 1));
+                } else a = Integer.parseInt(separatedExpression.get(i - 1));
+
                 int result = 0;
 
                 switch (separatedExpression.get(i)) {
@@ -208,25 +222,30 @@ public class RubyToJavaInterpreter {
         return Integer.parseInt(separatedExpression.get(0));
     }
 
-    private static List<String> separateExpression(String expression) {
+    public static List<String> separateExpression(String expression) {
         expression = expression.replaceAll(" ", "");
         List<String> separatedExpression = new ArrayList<>();
-        StringBuilder number = new StringBuilder();
+        StringBuilder token = new StringBuilder();
 
         for (char ch : expression.toCharArray()) {
-            if (Character.isDigit(ch)) {
-                number.append(ch);
+            if (Character.isLetter(ch)) {
+                if (!token.isEmpty() && Character.isDigit(token.charAt(0))) {
+                    separatedExpression.add(token.toString());
+                    token.setLength(0);
+                }
+                token.append(ch);
+            } else if (Character.isDigit(ch)) {
+                token.append(ch);
             } else {
-                if (number.length() > 0) {
-                    separatedExpression.add(number.toString());
-                    number.setLength(0);
+                if (!token.isEmpty()) {
+                    separatedExpression.add(token.toString());
+                    token.setLength(0);
                 }
                 separatedExpression.add(String.valueOf(ch));
             }
         }
-
-        if (number.length() > 0) {
-            separatedExpression.add(number.toString());
+        if (!token.isEmpty()) {
+            separatedExpression.add(token.toString());
         }
 
         return separatedExpression;

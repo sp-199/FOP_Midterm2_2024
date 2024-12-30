@@ -14,9 +14,5 @@ public class Main {
         }
 
         System.out.println();
-
-        RubyToJavaInterpreter.variableMap.forEach((key, value) -> {
-            System.out.println(key + ": " + value);
-        });
     }
 }

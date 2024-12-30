@@ -86,7 +86,6 @@ public class RubyToJavaInterpreter {
         }
     }
 
-    // Checking for if/else statements
     public static void IfElseStatements(String line) {
         for (int i = 0; i < line.length(); i++) {
             if (line.charAt(i) == '(' || line.charAt(i) == ')') continue;
@@ -121,46 +120,61 @@ public class RubyToJavaInterpreter {
         }
     }
 
-    public static boolean Comparator(String condition) {
-        String var1 = "", var2 = "", operator = "";
-        boolean isRightSide = false;
+public static boolean Comparator(String condition) {
+    String var1 = "", var2 = "", operator = "";
+    boolean isRightSide = false;
 
-        for (int i = 0; i < condition.length(); i++) {
-            char current = condition.charAt(i);
-            if (current == '(' || current == ')') continue;
-            if (current == '=' || current == '!' || current == '>' || current == '<') {
-                operator += current;
-                isRightSide = true;
-                continue;
-            } else if (isRightSide) {
-                var2 += current;
-            } else var1 += current;
+    for (int i = 0; i < condition.length(); i++) {
+        char current = condition.charAt(i);
+        if (current == '(' || current == ')') continue;
+        if (current == '=' || current == '!' || current == '>' || current == '<') {
+            operator += current;
+            isRightSide = true;
+            continue;
+        } else if (isRightSide) {
+            var2 += current;
+        } else {
+            var1 += current;
         }
-
-        int leftValue = 0;
-        int rightValue = 0;
-
-        if (ContainsExpression(var1)) var1 = String.valueOf(EvaluateArithmeticExpression(var1));
-
-        if (ContainsExpression(var2)) var2 = String.valueOf(EvaluateArithmeticExpression(var2));
-
-
-        if (Character.isLetter(var1.charAt(0))) leftValue = (Integer) variableMap.get(var1);
-        else leftValue = Integer.parseInt(var1);
-        if (Character.isLetter(var2.charAt(0))) rightValue = (Integer) variableMap.get(var2);
-        else rightValue = Integer.parseInt(var2);
-
-//        if (leftValue == 0) leftValue = Integer.parseInt(var1);
-//        if (rightValue == 0) rightValue = Integer.parseInt(var2);
-
-        if (operator.equals("==")) return leftValue == rightValue;
-        else if (operator.equals("!=")) return leftValue != rightValue;
-        else if (operator.equals(">=")) return leftValue >= rightValue;
-        else if (operator.equals("<=")) return leftValue <= rightValue;
-        else if (operator.equals(">")) return leftValue > rightValue;
-        else if (operator.equals("<")) return leftValue < rightValue;
-        return false;
     }
+
+    var1 = var1.trim();
+    var2 = var2.trim();
+
+    int leftValue = evaluateVariableOrExpression(var1);
+    int rightValue = evaluateVariableOrExpression(var2);
+
+    switch (operator) {
+        case "==":
+            return leftValue == rightValue;
+        case "!=":
+            return leftValue != rightValue;
+        case ">=":
+            return leftValue >= rightValue;
+        case "<=":
+            return leftValue <= rightValue;
+        case ">":
+            return leftValue > rightValue;
+        case "<":
+            return leftValue < rightValue;
+        default:
+            throw new IllegalArgumentException("Unsupported operator: " + operator);
+    }
+}
+
+    private static int evaluateVariableOrExpression(String input) {
+        if (input.matches("\\d+")) {
+            return Integer.parseInt(input);
+        }
+        if (variableMap.containsKey(input)) {
+            Object value = variableMap.get(input);
+            if (value instanceof Integer) {
+                return (Integer) value;
+            }
+        }
+        throw new IllegalArgumentException("Variable not found or not an integer: " + input);
+    }
+
 
     public static int EvaluateArithmeticExpression(String expression) {
         List<String> separatedExpression = SeparateExpression(expression);
@@ -276,7 +290,11 @@ public class RubyToJavaInterpreter {
             if(line.charAt(0)=='\''){
                 line=line.replace("'", "");
             }
-            System.out.println(line);
+            if(variableMap.containsKey(line)){
+                System.out.println(variableMap.get(line));
+            }else{
+                System.out.println(line);
+            }
         } else{
             System.out.print("");
         }
@@ -286,27 +304,11 @@ public class RubyToJavaInterpreter {
         return line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/") || line.contains("%");
     }
 
-//    public static int FindWhile(String[] linesArray) {
-//        for (int i = 0; i < linesArray.length; i++) {
-//            if (linesArray[i].contains("while ") || linesArray[i].contains("while(")) return i;
-//        }
-//        return -1;
-//    }
-//
-//    public static int FindLoopEnd(String[] linesArray) {
-//        int counter = 0;
-//        for (int i = 0; i < linesArray.length; i++) {
-//            if (linesArray[i].contains("if")) counter++;
-//            if (counter == 0 && linesArray[i].contains("end")) return i;
-//            if (linesArray[i].contains("end")) counter--;
-//        }
-//        return -1;
-//    }
-
-//    public static void WhileConditionChecker(String line) {
-//        String condition = line.split("while")[1];
-//        condition = condition.replaceAll(" ", "").replaceAll("\\(", "")
-//                .replaceAll("\\)", "");
-//        System.out.println(condition);
-//    }
+    public static String RemoveComment(String line){
+        return line.substring(0, line.indexOf("#"));
+    }
+    public static boolean IsComment(String line){
+        line = line.trim();
+        return line.contains("#");
+    }
 }

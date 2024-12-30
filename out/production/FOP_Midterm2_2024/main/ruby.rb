@@ -5,9 +5,11 @@ inte = 29
 isNotActive = false
 
 
-if inte != age
+if inte == age
     is_active = false
 else
+
+
 
     isNotActive = true
 end

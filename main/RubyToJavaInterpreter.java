@@ -139,7 +139,6 @@ public class RubyToJavaInterpreter {
 
         if (Character.isLetter(var2.charAt(0))) rightValue = (Integer) variableMap.get(var2);
 
-
         if (leftValue == 0) leftValue = Integer.parseInt(var1);
         if (rightValue == 0) rightValue = Integer.parseInt(var2);
 

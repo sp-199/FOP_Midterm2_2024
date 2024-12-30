@@ -8,8 +8,7 @@ public class Main {
         String rubyCode= "main/ruby.rb";
         for (String line: RubyToJavaInterpreter.textFileToStringArray(rubyCode)) {
             RubyToJavaInterpreter.elseDetector(line);
-            if (RubyToJavaInterpreter.skipLine) {RubyToJavaInterpreter.skipLine = false;
-                System.out.println("SKIPPED"); continue;}
+            if (RubyToJavaInterpreter.skipLine) {RubyToJavaInterpreter.skipLine = false; continue;}
             RubyToJavaInterpreter.findVariableDeclaration(line);
             RubyToJavaInterpreter.ifElseStatements(line);
         }

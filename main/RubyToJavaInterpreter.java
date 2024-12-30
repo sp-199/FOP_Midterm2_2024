@@ -39,11 +39,9 @@ public class RubyToJavaInterpreter {
                 String variableName = "";
                 String variableValue = "";
 
-                // Ignoring optional space
                 int j = i - 1;
                 if (line.charAt(i - 1) == ' ') j--;
 
-                // Getting variable name
                 while (j >= 0 && line.charAt(j) != ' ') {
                     variableName += line.charAt(j);
                     j--;
@@ -54,13 +52,11 @@ public class RubyToJavaInterpreter {
                 int k = i + 1;
                 if (line.charAt(k) == ' ') k++;
 
-                // Getting variable value
                 while (k < line.length()) {
                     variableValue += line.charAt(k);
                     k++;
                 }
 
-                // Checking for variable type and adding to map
                 if (ContainsExpression(variableValue)) {
                     variableMap.put(variableName, EvaluateArithmeticExpression(variableValue));
                     typeMap.put(variableName, Integer.class);

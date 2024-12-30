@@ -208,27 +208,64 @@ public class RubyToJavaInterpreter {
         return Integer.parseInt(separatedExpression.get(0));
     }
 
-    private static List<String> separateExpression(String expression) {
+    public static List<String> separateExpression(String expression) {
         expression = expression.replaceAll(" ", "");
         List<String> separatedExpression = new ArrayList<>();
-        StringBuilder number = new StringBuilder();
+        StringBuilder token = new StringBuilder();
 
         for (char ch : expression.toCharArray()) {
-            if (Character.isDigit(ch)) {
-                number.append(ch);
+            if (Character.isLetter(ch)) {
+                if (token.length() > 0 && Character.isDigit(token.charAt(0))) {
+                    separatedExpression.add(token.toString());
+                    token.setLength(0);
+                }
+                token.append(ch);
+            } else if (Character.isDigit(ch)) {
+                token.append(ch);
             } else {
-                if (number.length() > 0) {
-                    separatedExpression.add(number.toString());
-                    number.setLength(0);
+                if (token.length() > 0) {
+                    separatedExpression.add(token.toString());
+                    token.setLength(0);
                 }
                 separatedExpression.add(String.valueOf(ch));
             }
         }
-
-        if (number.length() > 0) {
-            separatedExpression.add(number.toString());
+        if (token.length() > 0) {
+            separatedExpression.add(token.toString());
         }
 
         return separatedExpression;
+    }
+
+    public static void print(String line){
+        if (line.contains("puts ")) {
+            line = line.replace("puts ", "");
+            if(line.charAt(0)=='('){
+                line=line.replace("(", "");
+                line=line.replace(")", "");
+            }
+            if(line.charAt(0)=='"'){
+                line=line.replace("\"", "");
+            }
+            if(line.charAt(0)=='\''){
+                line=line.replace("'", "");
+            }
+            System.out.println(line);
+        }else if (line.contains("puts")) {
+            line = line.replace("puts", "");
+            if(line.charAt(0)=='('){
+                line=line.replace("(", "");
+                line=line.replace(")", "");
+            }
+            if(line.charAt(0)=='"'){
+                line=line.replace("\"", "");
+            }
+            if(line.charAt(0)=='\''){
+                line=line.replace("'", "");
+            }
+            System.out.println(line);
+        } else{
+            System.out.println();
+        }
     }
 }

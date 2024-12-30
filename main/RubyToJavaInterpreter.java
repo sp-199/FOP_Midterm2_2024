@@ -286,27 +286,27 @@ public class RubyToJavaInterpreter {
         return line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/") || line.contains("%");
     }
 
-//    public static int FindWhile(String[] linesArray) {
-//        for (int i = 0; i < linesArray.length; i++) {
-//            if (linesArray[i].contains("while ") || linesArray[i].contains("while(")) return i;
-//        }
-//        return -1;
-//    }
-//
-//    public static int FindLoopEnd(String[] linesArray) {
-//        int counter = 0;
-//        for (int i = 0; i < linesArray.length; i++) {
-//            if (linesArray[i].contains("if")) counter++;
-//            if (counter == 0 && linesArray[i].contains("end")) return i;
-//            if (linesArray[i].contains("end")) counter--;
-//        }
-//        return -1;
-//    }
+    public static int FindWhile(String[] linesArray) {
+        for (int i = 0; i < linesArray.length; i++) {
+            if (linesArray[i].contains("while ") || linesArray[i].contains("while(")) return i;
+        }
+        return -1;
+    }
 
-//    public static void WhileConditionChecker(String line) {
-//        String condition = line.split("while")[1];
-//        condition = condition.replaceAll(" ", "").replaceAll("\\(", "")
-//                .replaceAll("\\)", "");
-//        System.out.println(condition);
-//    }
+    public static int FindLoopEnd(String[] linesArray) {
+        int counter = 0;
+        for (int i = 0; i < linesArray.length; i++) {
+            if (linesArray[i].contains("if")) counter++;
+            if (counter == 0 && linesArray[i].contains("end")) return i;
+            if (linesArray[i].contains("end")) counter--;
+        }
+        return -1;
+    }
+
+    public static void WhileConditionChecker(String line) {
+        String condition = line.split("while")[1];
+        condition = condition.replaceAll(" ", "").replaceAll("\\(", "")
+                .replaceAll("\\)", "");
+        System.out.println(condition);
+    }
 }

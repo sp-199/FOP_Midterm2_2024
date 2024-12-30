@@ -5,8 +5,8 @@ public class Main {
         String rubyCode= "main/ruby.rb";
         String[] lineArray = RubyToJavaInterpreter.TextFileToStringArray(rubyCode);
 
-//        RubyToJavaInterpreter.WhileConditionChecker(lineArray[RubyToJavaInterpreter.FindWhile(lineArray)]);
-//        System.out.println(RubyToJavaInterpreter.FindLoopEnd(lineArray));
+        RubyToJavaInterpreter.WhileConditionChecker(lineArray[RubyToJavaInterpreter.FindWhile(lineArray)]);
+        System.out.println(RubyToJavaInterpreter.FindLoopEnd(lineArray));
 
         for (int current = 0; current < lineArray.length; current++) {
             RubyToJavaInterpreter.ElseDetector(lineArray[current]);

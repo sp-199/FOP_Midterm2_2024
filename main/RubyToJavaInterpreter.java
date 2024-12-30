@@ -116,49 +116,49 @@ public class RubyToJavaInterpreter {
         }
     }
 
-public static boolean Comparator(String condition) {
-    String var1 = "", var2 = "", operator = "";
-    boolean isRightSide = false;
+    public static boolean Comparator(String condition) {
+        String var1 = "", var2 = "", operator = "";
+        boolean isRightSide = false;
 
-    for (int i = 0; i < condition.length(); i++) {
-        char current = condition.charAt(i);
-        if (current == '(' || current == ')') continue;
-        if (current == '=' || current == '!' || current == '>' || current == '<') {
-            operator += current;
-            isRightSide = true;
-            continue;
-        } else if (isRightSide) {
-            var2 += current;
-        } else {
-            var1 += current;
+        for (int i = 0; i < condition.length(); i++) {
+            char current = condition.charAt(i);
+            if (current == '(' || current == ')') continue;
+            if (current == '=' || current == '!' || current == '>' || current == '<') {
+                operator += current;
+                isRightSide = true;
+                continue;
+            } else if (isRightSide) {
+                var2 += current;
+            } else {
+                var1 += current;
+            }
+        }
+
+        var1 = var1.trim();
+        var2 = var2.trim();
+
+        int leftValue = EvaluateVariableOrExpression(var1);
+        int rightValue = EvaluateVariableOrExpression(var2);
+
+        switch (operator) {
+            case "==":
+                return leftValue == rightValue;
+            case "!=":
+                return leftValue != rightValue;
+            case ">=":
+                return leftValue >= rightValue;
+            case "<=":
+                return leftValue <= rightValue;
+            case ">":
+                return leftValue > rightValue;
+            case "<":
+                return leftValue < rightValue;
+            default:
+                throw new IllegalArgumentException("Unsupported operator: " + operator);
         }
     }
 
-    var1 = var1.trim();
-    var2 = var2.trim();
-
-    int leftValue = evaluateVariableOrExpression(var1);
-    int rightValue = evaluateVariableOrExpression(var2);
-
-    switch (operator) {
-        case "==":
-            return leftValue == rightValue;
-        case "!=":
-            return leftValue != rightValue;
-        case ">=":
-            return leftValue >= rightValue;
-        case "<=":
-            return leftValue <= rightValue;
-        case ">":
-            return leftValue > rightValue;
-        case "<":
-            return leftValue < rightValue;
-        default:
-            throw new IllegalArgumentException("Unsupported operator: " + operator);
-    }
-}
-
-    private static int evaluateVariableOrExpression(String input) {
+    private static int EvaluateVariableOrExpression(String input) {
         if (input.matches("\\d+")) {
             return Integer.parseInt(input);
         }
@@ -286,10 +286,14 @@ public static boolean Comparator(String condition) {
             if(line.charAt(0)=='\''){
                 line=line.replace("'", "");
             }
-            if(variableMap.containsKey(line)){
-                System.out.println(variableMap.get(line));
+            if(ContainsExpression(line)){
+                System.out.println(EvaluateArithmeticExpression(line));
             }else{
-                System.out.println(line);
+                if(variableMap.containsKey(line)){
+                    System.out.println(variableMap.get(line));
+                }else{
+                    System.out.println(line);
+                }
             }
         } else{
             System.out.print("");
@@ -307,4 +311,6 @@ public static boolean Comparator(String condition) {
         line = line.trim();
         return line.contains("#");
     }
+
+
 }

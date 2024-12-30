@@ -15,7 +15,7 @@ public class RubyToJavaInterpreter {
     public static boolean skipLine = false;
     public static boolean shouldSkip = false;
 
-    public static String[]textFileToStringArray(String fileName){
+    public static String[] TextFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -32,7 +32,7 @@ public class RubyToJavaInterpreter {
         return rubyLinesArray;
     }
 
-    public static void findVariableDeclaration (String line) {
+    public static void FindVariableDeclaration(String line) {
         for (int i = 1; i < line.length(); i++) {
             if (line.charAt(i) == '=' && line.charAt(i + 1) != '=' && line.charAt(i - 1) != '=' &&
                     line.charAt(i - 1) != '!' && line.charAt(i - 1) != '>' && line.charAt(i - 1) != '<') {
@@ -61,8 +61,8 @@ public class RubyToJavaInterpreter {
                 }
 
                 // Checking for variable type and adding to map
-                if (containsExpression(variableValue)) {
-                    variableMap.put(variableName, evaluateArithmeticExpression(variableValue));
+                if (ContainsExpression(variableValue)) {
+                    variableMap.put(variableName, EvaluateArithmeticExpression(variableValue));
                     typeMap.put(variableName, Integer.class);
                 } else if (variableValue.charAt(0) == '"' || variableValue.charAt(0) == '\'') {
                     variableMap.put(variableName, variableValue.substring(1, variableValue.length() - 1));
@@ -87,9 +87,10 @@ public class RubyToJavaInterpreter {
     }
 
     // Checking for if/else statements
-    public static void ifElseStatements (String line) {
+    public static void IfElseStatements(String line) {
         for (int i = 0; i < line.length(); i++) {
-            if (line.charAt(i) == 'i' && line.charAt(i + 1) == 'f' && line.charAt(i + 2) == ' ') {
+            if (line.charAt(i) == '(' || line.charAt(i) == ')') continue;
+            if (line.charAt(i) == 'i' && line.charAt(i + 1) == 'f' && (line.charAt(i + 2) == ' ' || line.charAt(i + 2) == '(')) {
                 String condition = "";
                 int j = i + 2;
                 while (j < line.length() - 1) {
@@ -99,7 +100,7 @@ public class RubyToJavaInterpreter {
                     }
                     condition += line.charAt(j);
                 }
-                boolean conditionState = comparator(condition);
+                boolean conditionState = Comparator(condition);
                 skipLine = !conditionState;
                 shouldSkip = !conditionState;
                 break;
@@ -107,7 +108,7 @@ public class RubyToJavaInterpreter {
         }
     }
 
-    public static void elseDetector (String line) {
+    public static void ElseDetector(String line) {
         if (shouldSkip) {
             if (line.replaceAll(" ", "").equals("else") ||
                     line.replaceAll(" ", "").equals("end")) {
@@ -120,17 +121,18 @@ public class RubyToJavaInterpreter {
         }
     }
 
-    public static boolean comparator (String condition) {
+    public static boolean Comparator(String condition) {
         String var1 = "", var2 = "", operator = "";
-        boolean rightSide = false;
+        boolean isRightSide = false;
 
         for (int i = 0; i < condition.length(); i++) {
             char current = condition.charAt(i);
+            if (current == '(' || current == ')') continue;
             if (current == '=' || current == '!' || current == '>' || current == '<') {
                 operator += current;
-                rightSide = true;
+                isRightSide = true;
                 continue;
-            } else if (rightSide) {
+            } else if (isRightSide) {
                 var2 += current;
             } else var1 += current;
         }
@@ -138,12 +140,18 @@ public class RubyToJavaInterpreter {
         int leftValue = 0;
         int rightValue = 0;
 
+        if (ContainsExpression(var1)) var1 = String.valueOf(EvaluateArithmeticExpression(var1));
+
+        if (ContainsExpression(var2)) var2 = String.valueOf(EvaluateArithmeticExpression(var2));
+
+
         if (Character.isLetter(var1.charAt(0))) leftValue = (Integer) variableMap.get(var1);
-
+        else leftValue = Integer.parseInt(var1);
         if (Character.isLetter(var2.charAt(0))) rightValue = (Integer) variableMap.get(var2);
+        else rightValue = Integer.parseInt(var2);
 
-        if (leftValue == 0) leftValue = Integer.parseInt(var1);
-        if (rightValue == 0) rightValue = Integer.parseInt(var2);
+//        if (leftValue == 0) leftValue = Integer.parseInt(var1);
+//        if (rightValue == 0) rightValue = Integer.parseInt(var2);
 
         if (operator.equals("==")) return leftValue == rightValue;
         else if (operator.equals("!=")) return leftValue != rightValue;
@@ -154,8 +162,8 @@ public class RubyToJavaInterpreter {
         return false;
     }
 
-    public static int evaluateArithmeticExpression(String expression) {
-        List<String> separatedExpression = separateExpression(expression);
+    public static int EvaluateArithmeticExpression(String expression) {
+        List<String> separatedExpression = SeparateExpression(expression);
 
         for (int i = 0; i < separatedExpression.size(); i++) {
             if (separatedExpression.get(i).equals("*") || separatedExpression.get(i).equals("/") || separatedExpression.get(i).equals("%")) {
@@ -225,7 +233,7 @@ public class RubyToJavaInterpreter {
         return Integer.parseInt(separatedExpression.get(0));
     }
 
-    public static List<String> separateExpression(String expression) {
+    public static List<String> SeparateExpression(String expression) {
         expression = expression.replaceAll(" ", "");
         List<String> separatedExpression = new ArrayList<>();
         StringBuilder token = new StringBuilder();
@@ -254,7 +262,7 @@ public class RubyToJavaInterpreter {
         return separatedExpression;
     }
 
-    public static void print(String line){
+    public static void Print(String line){
         if (line.contains("puts ") || line.contains("puts")) {
             line = line.replace("puts", "");
             line = line.trim();
@@ -274,7 +282,31 @@ public class RubyToJavaInterpreter {
         }
     }
 
-    public static boolean containsExpression(String line) {
+    public static boolean ContainsExpression(String line) {
         return line.contains("+") || line.contains("-") || line.contains("*") || line.contains("/") || line.contains("%");
     }
+
+//    public static int FindWhile(String[] linesArray) {
+//        for (int i = 0; i < linesArray.length; i++) {
+//            if (linesArray[i].contains("while ") || linesArray[i].contains("while(")) return i;
+//        }
+//        return -1;
+//    }
+//
+//    public static int FindLoopEnd(String[] linesArray) {
+//        int counter = 0;
+//        for (int i = 0; i < linesArray.length; i++) {
+//            if (linesArray[i].contains("if")) counter++;
+//            if (counter == 0 && linesArray[i].contains("end")) return i;
+//            if (linesArray[i].contains("end")) counter--;
+//        }
+//        return -1;
+//    }
+
+//    public static void WhileConditionChecker(String line) {
+//        String condition = line.split("while")[1];
+//        condition = condition.replaceAll(" ", "").replaceAll("\\(", "")
+//                .replaceAll("\\)", "");
+//        System.out.println(condition);
+//    }
 }

@@ -6,18 +6,19 @@ import java.io.IOException;
 import java.util.*;
 import java.lang.StringBuilder;
 
-public class RubyToJavaInterpreter {
+  public class RubyToJavaInterpreter {
 
     public static HashMap<String, Object> variableMap = new HashMap<>();
-    public static HashMap<String, Class<?>> typeMap = new HashMap<>();
-    public static boolean skipLine = false;
-    public static boolean shouldSkip = false;
-    public static ArrayList<Integer> whileStartList = new ArrayList<>();
-    public static ArrayList<String> whileConditionList = new ArrayList<>();
-    public static int endCounter = 0;
+     public static HashMap<String, Class<?>> typeMap = new HashMap<>();
+      public static boolean skipLine = false;
+       public static boolean shouldSkip = false;
+       public static ArrayList<Integer> whileStartList = new ArrayList<>();
+      public static ArrayList<String> whileConditionList = new ArrayList<>();
+     public static int endCounter = 0;
     public static boolean inWhile = false;
 
-    public static String[] TextFileToStringArray(String fileName){
+
+     public static String[] TextFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
@@ -28,10 +29,10 @@ public class RubyToJavaInterpreter {
             System.out.println(e.getMessage());
         }
 
-        String[] rubyLinesArray = new String[rubyLineArrayList.size()];
+         String[] rubyLinesArray = new String[rubyLineArrayList.size()];
         rubyLineArrayList.toArray(rubyLinesArray);
 
-        return rubyLinesArray;
+           return rubyLinesArray;
     }
 
     public static void FindVariableDeclaration(String line) {
@@ -154,19 +155,19 @@ public class RubyToJavaInterpreter {
 
 
         if (Character.isLetter(var1.charAt(0)) || var1.charAt(0) == '_') leftValue = (Integer) variableMap.get(var1);
-        else leftValue = Integer.parseInt(var1);
+          else leftValue = Integer.parseInt(var1);
         if (Character.isLetter(var2.charAt(0)) || var2.charAt(0) == '_') rightValue = (Integer) variableMap.get(var2);
-        else rightValue = Integer.parseInt(var2);
+          else rightValue = Integer.parseInt(var2);
 
 //        if (leftValue == 0) leftValue = Integer.parseInt(var1);
 //        if (rightValue == 0) rightValue = Integer.parseInt(var2);
 
         if (operator.equals("==")) return leftValue == rightValue;
-        else if (operator.equals("!=")) return leftValue != rightValue;
-        else if (operator.equals(">=")) return leftValue >= rightValue;
-        else if (operator.equals("<=")) return leftValue <= rightValue;
-        else if (operator.equals(">")) return leftValue > rightValue;
-        else if (operator.equals("<")) return leftValue < rightValue;
+         else if (operator.equals("!=")) return leftValue != rightValue;
+          else if (operator.equals(">=")) return leftValue >= rightValue;
+           else if (operator.equals("<=")) return leftValue <= rightValue;
+            else if (operator.equals(">")) return leftValue > rightValue;
+             else if (operator.equals("<")) return leftValue < rightValue;
         return false;
     }
 
@@ -350,4 +351,5 @@ public class RubyToJavaInterpreter {
         line = line.trim();
         return line.contains("#");
     }
+
 }

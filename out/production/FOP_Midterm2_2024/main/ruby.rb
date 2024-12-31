@@ -7,3 +7,34 @@ while i <= n
 end
 
 puts sum
+
+
+t = 8
+x = 120
+k = 0
+while k*t <= x
+    k=k+1
+end
+puts k
+
+n = 135187
+reversed_number = 0
+while n > 0
+    last_digit = n % 10
+    reversed_number = reversed_number * 10 + last_digit
+    n = n/10
+end
+puts reversed_number
+
+
+
+
+    if n < 2
+        return false
+    end
+    for i in 2..n / 2
+        if n % i == 0
+            return false
+        end
+    return true
+        end

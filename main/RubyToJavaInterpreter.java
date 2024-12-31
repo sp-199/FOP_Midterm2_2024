@@ -17,6 +17,7 @@ public class RubyToJavaInterpreter {
     public static int endCounter = 0;
     public static boolean inWhile = false;
 
+
     public static String[] TextFileToStringArray(String fileName){
         ArrayList<String> rubyLineArrayList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
@@ -339,7 +340,9 @@ public class RubyToJavaInterpreter {
                     }
                 } else endCounter--;
             }
-        } catch (NoSuchElementException _) {}
+        } catch (NoSuchElementException nsee) {
+            nsee.getMessage();
+        }
     }
 
     public static String RemoveComment(String line){
@@ -350,4 +353,5 @@ public class RubyToJavaInterpreter {
         line = line.trim();
         return line.contains("#");
     }
+
 }

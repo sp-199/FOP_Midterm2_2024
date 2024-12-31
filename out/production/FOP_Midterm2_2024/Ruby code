@@ -11,15 +11,14 @@ def Sum_Of_First_n_Numbers(n)
 end
 
 #while variant
-def Sum_Of_First_N_Numbers(n)
-  sum = 0
-  i = 1
-  while i <= n
+n = 10
+sum = 0
+i = 1
+while i <= n
     sum = sum + i
     i = i + 1
-  end
-  return sum
 end
+puts sum
 
 
 # Factorial of n

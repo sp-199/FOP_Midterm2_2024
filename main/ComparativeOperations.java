@@ -3,7 +3,7 @@ package main;
 import java.util.HashMap;
 
 public class ComparativeOperations {
-       public static boolean EqualityResult(String condition, HashMap variableMap) {
+    public static boolean EqualityResult(String condition, HashMap variableMap) {
         int index = condition.indexOf("==");
         String variable1Name = "";
         String variable2Name = "";

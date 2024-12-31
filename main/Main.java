@@ -23,8 +23,5 @@ public class Main {
             RubyToJavaInterpreter.WhileLoop(lineArray[current]);
         }
 
-//        RubyToJavaInterpreter.variableMap.forEach((key, value) -> {
-//            System.out.println(key + ": " + value);
-//        });
     }
 }
